@@ -1,0 +1,35 @@
+{
+  "name": "w3ts-w3mmd",
+  "version": "1.0.0",
+  "description": "w3mmd extension for w3ts",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:voces/w3ts-w3mmd.git"
+  },
+  "author": "Robert Coe",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-env": "^7.9.5",
+    "@types/jest": "^25.2.1",
+    "@typescript-eslint/eslint-plugin": "^2.28.0",
+    "@typescript-eslint/parser": "^2.28.0",
+    "eslint": "^6.8.0",
+    "eslint-config-mdcs": "^4.2.3",
+    "eslint-config-verit": "^1.0.4",
+    "jest": "^25.3.0",
+    "lua-types": "^2.7.0",
+    "ts-jest": "^25.4.0",
+    "typescript": "^3.8.3",
+    "w3api": "^2.2.0",
+    "w3ts": "^2.1.1",
+    "war3-types": "^1.0.2"
+  },
+  "peerDependencies": {
+    "w3ts": "^2.1.1"
+  }
+}
