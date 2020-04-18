@@ -1,6 +1,6 @@
 {
   "name": "w3ts-w3mmd",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "w3mmd extension for w3ts",
   "main": "dist/index.js",
   "scripts": {
@@ -31,5 +31,6 @@
   },
   "peerDependencies": {
     "w3ts": "^2.1.1"
-  }
+  },
+  "files": ["dist"]
 }
