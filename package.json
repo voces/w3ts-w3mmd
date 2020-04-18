@@ -1,8 +1,8 @@
 {
   "name": "w3ts-w3mmd",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "w3mmd extension for w3ts",
-  "main": "dist/index.js",
+  "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest"
@@ -32,6 +32,14 @@
   "peerDependencies": {
     "w3ts": "^2.1.1"
   },
-  "files": ["dist"],
-  "keywords": ["warcraft", "wc3", "typescript", "ts", "w3ts"]
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "warcraft",
+    "wc3",
+    "typescript",
+    "ts",
+    "w3ts"
+  ]
 }

@@ -1,3 +1,4 @@
+/** @noSelfInFile **/
 
 import { addScriptHook, W3TS_HOOK } from "w3ts";
 
@@ -251,7 +252,7 @@ addScriptHook( W3TS_HOOK.MAIN_AFTER, (): void => {
 
 		ready = true;
 
-		queue.forEach( emit );
+		queue.forEach( message => emit( message ) );
 
 	} );
 
