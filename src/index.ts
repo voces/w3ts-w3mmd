@@ -107,7 +107,7 @@ export const setPlayerFlag = (
 
 };
 
-interface FixedLengthArray<T, L extends number> extends Array<T> {
+export interface FixedLengthArray<T, L extends number> extends Array<T> {
 	length: L;
 }
 
