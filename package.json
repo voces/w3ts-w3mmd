@@ -1,10 +1,9 @@
 {
   "name": "w3ts-w3mmd",
-  "version": "1.0.4",
+  "version": "1.0.4-forked",
   "description": "w3mmd extension for w3ts",
   "main": "src/index.ts",
   "scripts": {
-    "build": "tsc",
     "test": "jest"
   },
   "repository": {
@@ -26,11 +25,11 @@
     "ts-jest": "^25.4.0",
     "typescript": "^3.8.3",
     "w3api": "^2.2.0",
-    "w3ts": "^2.1.1",
+    "@voces/w3ts": "^2.1.2-fix.1",
     "war3-types": "^1.0.2"
   },
   "peerDependencies": {
-    "w3ts": "^2.1.1"
+    "@voces/w3ts": "^2.1.2-fix.1"
   },
   "files": [
     "src/index.ts"
