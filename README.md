@@ -11,10 +11,10 @@ npm i -S w3ts w3ts-w3mmd
 ### setPlayerFlag
 Sets a flag for a player.
 ```ts
-import {setPlayerFlag} from "w3ts-w3mmd";
+import { setPlayerFlag } from "w3ts-w3mmd";
 
-setPlayerFlag( Player( 0 ), "winner" );
-setPlayerFlag( Player( 1 ), "loser" );
+setPlayerFlag(Player(0), "winner");
+setPlayerFlag(Player(1), "loser");
 ```
 
 ### defineEvent
@@ -23,17 +23,19 @@ argument (0-indexed) is formatted `{n}`.
 
 Returns a callback used to log an instance of the event.
 ```ts
-import {defineEvent} from "w3ts-w3mmd";
-import {Trigger} from "w3ts";
+import { defineEvent } from "w3ts-w3mmd";
+import { Trigger } from "w3ts";
 
-const logKill = defineEvent( "kill", "{0} killed {1}", [ "killer", "victim" ] );
+const logKill = defineEvent("kill", "{0} killed {1}", ["killer", "victim"]);
 
 new Trigger()
-    .registerAnyUnitEvent( EVENT_PLAYER_UNIT_DEATH )
-    .addAction( () => logKill(
-        GetOwningPlayer( GetKillingUnit() ),
-        GetOwningPlayer( GetDyingUnit() ),
-    ) );
+	.registerAnyUnitEvent(EVENT_PLAYER_UNIT_DEATH)
+	.addAction(() =>
+		logKill(
+			GetOwningPlayer(GetKillingUnit()),
+			GetOwningPlayer(GetDyingUnit()),
+		),
+	);
 ```
 
 ### defineStringValue
@@ -41,12 +43,12 @@ Defines a string value. Values can be updated throughout the game.
 
 Returns a callback to set the value.
 ```ts
-import {defineStringValue} from "w3ts-w3mmd";
+import { defineStringValue } from "w3ts-w3mmd";
 
-const setHero = defineStringValue( "hero" );
+const setHero = defineStringValue("hero");
 
-setHero( Player( 0 ), "Archmage" );
-setHero( Player( 1 ), "Mountain King" );
+setHero(Player(0), "Archmage");
+setHero(Player(1), "Mountain King");
 ```
 
 ### defineNumberValue
@@ -55,26 +57,27 @@ values default to integers, but can also be reals (floats).
 
 Returns a callback to set (default), increase, or decrease the value.
 ```ts
-import {defineNumberValue} from "w3ts-w3mmd";
-import {Trigger} from "w3ts";
+import { defineNumberValue } from "w3ts-w3mmd";
+import { Trigger } from "w3ts";
 
-const incKills = defineNumberValue( "kills", "high" );
-const setBonus = defineNumberValue( "bonus", "none", "none", "real" );
+const incKills = defineNumberValue("kills", "high");
+const setBonus = defineNumberValue("bonus", "none", "none", "real");
 
 // assuming Player( 0 ) wins; we'd want to reduce bonus if they lost
-setBonus( Player( 0 ), ( 2 - GetPlayerHandicap( Player( 0 ) ) ) );
+setBonus(Player(0), 2 - GetPlayerHandicap(Player(0)));
 
 new Trigger()
-    .registerAnyUnitEvent( EVENT_PLAYER_UNIT_DEATH )
-    .addAction( () =>
-        incKills( GetOwningPlayer( GetKillingUnit() ), 1, "add" )
-    );
+	.registerAnyUnitEvent(EVENT_PLAYER_UNIT_DEATH)
+	.addAction(() => incKills(GetOwningPlayer(GetKillingUnit()), 1, "add"));
 ```
 
 ### emitCustom
 Emits some custom w3mmd data. This would be used by a specialized parser.
 ```ts
-import {emitCustom} from "w3ts-w3mmd";
+import { emitCustom } from "w3ts-w3mmd";
 
-emitCustom( "build", compiletime( () => new Date().toISOString() ) );
+emitCustom(
+	"build",
+	compiletime(() => new Date().toISOString()),
+);
 ```
