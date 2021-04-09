@@ -142,7 +142,7 @@ export const defineStringValue = (
 	emit(`DefVarP ${packedName} string none ${suggestionType}`);
 
 	return (player: player, value: string): void => {
-		emit(`VarP ${GetPlayerId(player)} ${packedName} = ${value}`);
+		emit(`VarP ${GetPlayerId(player)} ${packedName} = ${pack(value)}`);
 	};
 };
 
