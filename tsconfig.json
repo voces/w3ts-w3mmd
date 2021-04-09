@@ -7,11 +7,7 @@
     "lib": ["es2020" ],
     "moduleResolution": "node",
     "strict": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
     "declaration": true,
-    "strictNullChecks": true,
     "paths": {
       "*": [
 				"../node_modules/*/dist/index",
@@ -22,6 +18,7 @@
       ]
     },
     "types": [
+      "lua-types/core/index",
 			"lua-types/core/coroutine",
 			"lua-types/core/global",
 			"lua-types/core/math",

@@ -1,7 +1,6 @@
-
 module.exports = {
-	globals: { "ts-jest": { tsConfig: "tsconfig.test.json" } },
-	moduleFileExtensions: [ "ts", "js" ],
+	globals: { "ts-jest": { tsconfig: "tsconfig.test.json" } },
+	moduleFileExtensions: ["ts", "js"],
 	moduleNameMapper: {
 		"^test/(.*)$": "<rootDir>/test/$1",
 	},
@@ -12,5 +11,5 @@ module.exports = {
 	},
 	testRegex: "(/src/.*\\.test)\\.[tj]s$",
 	testEnvironment: "node",
-	modulePaths: [ "src" ],
+	modulePaths: ["src"],
 };
