@@ -29,13 +29,13 @@ import { Trigger } from "w3ts";
 const logKill = defineEvent("kill", "{0} killed {1}", ["killer", "victim"]);
 
 new Trigger()
-	.registerAnyUnitEvent(EVENT_PLAYER_UNIT_DEATH)
-	.addAction(() =>
-		logKill(
-			GetOwningPlayer(GetKillingUnit()),
-			GetOwningPlayer(GetDyingUnit()),
-		),
-	);
+  .registerAnyUnitEvent(EVENT_PLAYER_UNIT_DEATH)
+  .addAction(() =>
+    logKill(
+      GetOwningPlayer(GetKillingUnit()),
+      GetOwningPlayer(GetDyingUnit()),
+    ),
+  );
 ```
 
 ### defineStringValue
@@ -67,8 +67,8 @@ const setBonus = defineNumberValue("bonus", "none", "none", "real");
 setBonus(Player(0), 2 - GetPlayerHandicap(Player(0)));
 
 new Trigger()
-	.registerAnyUnitEvent(EVENT_PLAYER_UNIT_DEATH)
-	.addAction(() => incKills(GetOwningPlayer(GetKillingUnit()), 1, "add"));
+  .registerAnyUnitEvent(EVENT_PLAYER_UNIT_DEATH)
+  .addAction(() => incKills(GetOwningPlayer(GetKillingUnit()), 1, "add"));
 ```
 
 ### emitCustom
@@ -77,7 +77,43 @@ Emits some custom w3mmd data. This would be used by a specialized parser.
 import { emitCustom } from "w3ts-w3mmd";
 
 emitCustom(
-	"build",
-	compiletime(() => new Date().toISOString()),
+  "build",
+  compiletime(() => new Date().toISOString()),
 );
+```
+
+## Initialization
+
+By default, `w3ts-w3mmd` will automatically emit w3mmd init messages, including
+the w3mmd version and player names. This behavior can be prevented by calling
+`stopInit`. This will prevent all emits until `init` is called.
+```ts
+import { stopInit, init } from "w3ts-w3mmd";
+
+stopInit();
+
+const afterPlayerNamesNormalized = () => {
+  init();
+};
+```
+
+Explicit handling of init emits can be done by using `emit`, `pack`, and
+`flagReady`:
+```ts
+import { emit, flagReady, pack, stopInit } from "w3ts-w3mmd";
+
+stopInit();
+
+const customInit = () => {
+  emit("init version 1 1");
+
+  for (let i = 0; i < bj_MAX_PLAYERS; i++) {
+    if (
+      GetPlayerSlotState(Player(i)) === PLAYER_SLOT_STATE_PLAYING &&
+      GetPlayerController(Player(i)) === MAP_CONTROL_USER
+    ) {
+      emit(`init pid ${i} ${pack(anonymize(Player(i)))}`);
+    }
+  }
+};
 ```
