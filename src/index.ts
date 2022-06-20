@@ -63,7 +63,7 @@ export const emit = (message: string): void => {
 
     if (
       GetPlayerController(testPlayer) === MAP_CONTROL_USER &&
-      GetPlayerSlotState(testPlayer) === PLAYER_SLOT_STATE_PLAYING
+      GetPlayerSlotState(testPlayer) !== PLAYER_SLOT_STATE_EMPTY
     ) {
       emitter = testPlayer;
     }
