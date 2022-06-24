@@ -63,7 +63,7 @@ export const emit = (message: string): void => {
 
     if (
       GetPlayerController(testPlayer) === MAP_CONTROL_USER &&
-      GetPlayerSlotState(testPlayer) !== PLAYER_SLOT_STATE_EMPTY
+      GetPlayerSlotState(testPlayer) === PLAYER_SLOT_STATE_PLAYING
     ) {
       emitter = testPlayer;
     }
@@ -207,7 +207,7 @@ export const init = () => {
     const player = Player(i);
     if (
       GetPlayerController(player) === MAP_CONTROL_USER &&
-      GetPlayerSlotState(player) === PLAYER_SLOT_STATE_PLAYING
+      GetPlayerSlotState(player) !== PLAYER_SLOT_STATE_EMPTY
     ) {
       emit(`init pid ${i} ${pack(GetPlayerName(player))}`);
     }
