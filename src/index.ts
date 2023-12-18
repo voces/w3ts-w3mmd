@@ -112,7 +112,7 @@ export const defineEvent = <L extends number>(
   name: string,
   format: string,
   ...args: FixedLengthArray<string, L>
-): ((...args: FixedLengthArray<string, L>) => void) => {
+): (...args: FixedLengthArray<string, L>) => void => {
   const packedName = pack(name);
   const packedArgs = args.map((arg) => pack(arg)).join(" ");
   const finalArgs = args.length ? `${args.length} ${packedArgs}` : args.length;
@@ -135,7 +135,7 @@ export const defineEvent = <L extends number>(
 export const defineStringValue = (
   name: string,
   suggestionType: "none" | "track" | "leaderboard" = "none",
-): ((player: player, value: string) => void) => {
+): (player: player, value: string) => void => {
   if (name.length > 32) throw `w3mmd: value name '${name}' is too long`;
   if (name.length === 0) throw "w3mmd: value name is empty";
 
@@ -162,11 +162,11 @@ export const defineNumberValue = (
   goalType: "none" | "high" | "low",
   suggestionType: "none" | "track" | "leaderboard" = "none",
   valueType: "int" | "real" = "int",
-): ((
+): (
   player: player,
   value: number,
   operation?: "add" | "sub" | "set",
-) => void) => {
+) => void => {
   if (name.length > 32) throw `w3mmd: value name '${name}' is too long`;
   if (name.length === 0) throw "w3mmd: value name is empty";
 
@@ -217,8 +217,8 @@ export const init = () => {
 };
 
 addScriptHook(W3TS_HOOK.MAIN_AFTER, (): void => {
-  FlushGameCache(InitGameCache("MMD.dat"));
-  cache = InitGameCache("MMD.dat");
+  FlushGameCache(InitGameCache("MMD.dat")!);
+  cache = InitGameCache("MMD.dat")!;
 
   const t = CreateTimer();
   TimerStart(t, 0, false, () => {
