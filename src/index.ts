@@ -116,13 +116,15 @@ export const defineEvent = <L extends number>(
 ): (...args: FixedLengthArray<string, L>) => void => {
   const packedName = pack(name);
   const packedArgs = args.map((arg) => pack(arg)).join(" ");
-  const finalArgs = args.length ? `${args.length} ${packedArgs}` : args.length;
+  const finalArgs = args.length > 0
+    ? `${args.length} ${packedArgs}`
+    : args.length;
 
   emit(`DefEvent ${packedName} ${finalArgs} ${pack(format)}`);
 
   return (...args: FixedLengthArray<string, L>): void => {
     const packedArgs = args.map((arg) => pack(arg)).join(" ");
-    emit(`Event ${packedName}${args.length ? ` ${packedArgs}` : ""}`);
+    emit(`Event ${packedName}${args.length > 0 ? ` ${packedArgs}` : ""}`);
   };
 };
 
