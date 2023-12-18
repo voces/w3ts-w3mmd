@@ -62,6 +62,7 @@ export const emit = (message: string): void => {
     const testPlayer = Player(GetRandomInt(0, bj_MAX_PLAYERS));
 
     if (
+      testPlayer &&
       GetPlayerController(testPlayer) === MAP_CONTROL_USER &&
       GetPlayerSlotState(testPlayer) === PLAYER_SLOT_STATE_PLAYING
     ) {
@@ -206,10 +207,11 @@ export const init = () => {
   for (let i = 0; i < bj_MAX_PLAYERS; i++) {
     const player = Player(i);
     if (
+      player &&
       GetPlayerController(player) === MAP_CONTROL_USER &&
       GetPlayerSlotState(player) !== PLAYER_SLOT_STATE_EMPTY
     ) {
-      emit(`init pid ${i} ${pack(GetPlayerName(player))}`);
+      emit(`init pid ${i} ${pack(GetPlayerName(player) ?? "")}`);
     }
   }
 
