@@ -197,12 +197,31 @@ export const emitCustom = (key: string, data: string): void => {
   emit(`custom ${pack(key)} ${pack(data)}`);
 };
 
+const onReadyHooks: (() => void)[] = [];
+
+/**
+ * Adds a callback that will be invoked when w3mmd has finished initializing.
+ * @param fn The callback to be invoked.
+ */
+export const onReady = (fn: () => void) => {
+  onReadyHooks.push(fn);
+};
+
+/**
+ * Manually sets the internal state to ready and flushes the queue. Called
+ * automatically unless `stopInit` is called.
+ */
 export const flagReady = () => {
   ready = true;
   queue.forEach((message) => emit(message));
   queue = [];
+  for (const hook of onReadyHooks) hook();
 };
 
+/**
+ * Manually begins initialization. Called automatically unless `stopInit` is
+ * called.
+ */
 export const init = () => {
   emit("init version 1 1");
 
@@ -232,6 +251,7 @@ addScriptHook(W3TS_HOOK.MAIN_AFTER, (): void => {
   });
 });
 
+/** Stops automatic initialization. */
 export const stopInit = () => {
   stopInitFlag = true;
 };

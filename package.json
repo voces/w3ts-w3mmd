@@ -1,6 +1,6 @@
 {
   "name": "w3ts-w3mmd",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "w3mmd extension for w3ts",
   "main": "./dist/index",
   "types": "./dist/index.d.ts",
