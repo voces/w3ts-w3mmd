@@ -1,5 +1,4 @@
 target
-package-lock.json
 dist
 
 # Logs
@@ -90,3 +89,5 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+.claude

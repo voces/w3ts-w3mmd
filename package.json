@@ -1,26 +1,36 @@
 {
   "name": "w3ts-w3mmd",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "w3mmd extension for w3ts",
-  "main": "./dist/index",
+  "type": "module",
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
   "files": [
-    "dist/**/*.lua",
-    "dist/**/*.d.ts"
+    "dist",
+    "src"
   ],
   "peerDependencies": {
     "w3ts": "^2.1.1 || ^3"
   },
   "scripts": {
-    "build": "tstl"
+    "build:js": "tsc -p tsconfig.dist.json",
+    "build:lua": "tstl",
+    "build": "npm run build:js && npm run build:lua"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:voces/w3ts-w3mmd.git"
   },
   "devDependencies": {
-    "typescript": "^5.2.2",
-    "typescript-to-lua": "^1.22.0",
+    "lua-types": "^2.14.1",
+    "typescript": "6.0.2",
+    "typescript-to-lua": "^1.36.0",
     "w3ts": "^3.0.2"
   },
   "author": "Robert Coe",
