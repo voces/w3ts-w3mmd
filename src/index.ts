@@ -1,6 +1,6 @@
 /** @noSelfInFile **/
 
-import { addScriptHook, W3TS_HOOK } from "w3ts";
+declare let main: () => void;
 
 const ESCAPED_CHARS = " \\";
 const OPERATION_MAP = {
@@ -239,17 +239,22 @@ export const init = () => {
   flagReady();
 };
 
-addScriptHook(W3TS_HOOK.MAIN_AFTER, (): void => {
-  FlushGameCache(InitGameCache("MMD.dat")!);
-  cache = InitGameCache("MMD.dat")!;
+if (typeof main !== "undefined") {
+  const originalMain = main;
+  main = (): void => {
+    originalMain();
 
-  const t = CreateTimer();
-  TimerStart(t, 0, false, () => {
-    DestroyTimer(t);
+    FlushGameCache(InitGameCache("MMD.dat")!);
+    cache = InitGameCache("MMD.dat")!;
 
-    if (!stopInitFlag) init();
-  });
-});
+    const t = CreateTimer();
+    TimerStart(t, 0, false, () => {
+      DestroyTimer(t);
+
+      if (!stopInitFlag) init();
+    });
+  };
+}
 
 /** Stops automatic initialization. */
 export const stopInit = () => {
