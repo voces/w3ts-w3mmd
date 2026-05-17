@@ -1,6 +1,6 @@
 {
   "name": "w3ts-w3mmd",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "w3mmd extension for w3ts",
   "type": "module",
   "main": "./dist/index.js",
@@ -8,6 +8,7 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
+      "tstl": "./dist/index",
       "default": "./dist/index.js"
     }
   },
@@ -21,7 +22,7 @@
   "scripts": {
     "build:js": "tsc -p tsconfig.dist.json",
     "build:lua": "tstl",
-    "build": "npm run build:js && npm run build:lua"
+    "build": "npm run build:lua && npm run build:js"
   },
   "repository": {
     "type": "git",
